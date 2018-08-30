@@ -52,6 +52,7 @@ public class Asteroid implements Entity, Collidable {
         bounds.y = position.y - radius;
         circle.y = position.y;
         orientation += angularSpeed * dt;
+        
     }
 
     @Override
@@ -95,7 +96,7 @@ public class Asteroid implements Entity, Collidable {
         // Asteroid vs Vortex: circle vs circle
 
         if (other instanceof LaserShot) {
-            return Collision.rectsOverlap(bounds, other.getMinimumBoundingRectangle());
+            return Collision.rectCircleOverlap(other.getMinimumEnclosingBall(), bounds);
         } else if (other instanceof Asteroid ||
                 other instanceof Ship ||
                 other instanceof VortexShot) {
